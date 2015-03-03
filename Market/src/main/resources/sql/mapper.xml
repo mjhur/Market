@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace= "memberMapper" >  
+
+    <select id ="getMemberInfo" parameterType="String" resultType= "com.web.vo.MemberVO">
+        select /*memberMapper.getMemberInfo*/ 
+        * from member_usr
+        WHERE USR_ID = #{usrId} 
+    </select >
+    
+    <select id ="idCheck" parameterType="String" resultType= "Integer">
+    	SELECT /*memberMapper.idCheck*/  
+    		   COUNT(*)
+    	  FROM member_usr
+		 WHERE USR_ID = #{usrId} 
+    </select>
+    
+    <select id ="login"  resultType= "Integer">
+    	SELECT /*memberMapper.login*/  
+    		   COUNT(*)
+    	  FROM member_usr
+		 WHERE USR_ID = #{id} 
+		   AND PW = #{pw}
+    </select>
+    
+    <insert id ="join"  parameterType= "com.web.vo.MemberVO">
+    	INSERT INTO member_usr (usr_id, pw, pw_answer, pw_hint, usr_name, phone_number, mobile_number)
+    	     VALUES ( #{usr_id}, #{pw}, #{pw_answer}, #{pw_hint}, #{usr_name}, #{phone_number}, #{mobile_number} )
+    </insert>
+    
+</mapper>
